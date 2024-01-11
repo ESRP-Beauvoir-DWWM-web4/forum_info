@@ -19,12 +19,13 @@ import {
   
   initTE({ Collapse, Dropdown });
 
-  import {
+import {
+    Datatable,
     Input,
     Ripple,
   } from "tw-elements";
   
-  initTE({ Input, Ripple });
+  initTE({ Datatable, Input, Ripple });
 
   
 

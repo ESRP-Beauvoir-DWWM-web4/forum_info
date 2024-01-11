@@ -21,6 +21,7 @@ class ArticleType extends AbstractType
                 'class' => Theme::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
+                'expanded' => true,
             ])
         ;
     }

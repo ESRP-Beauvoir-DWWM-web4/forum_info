@@ -33,6 +33,8 @@ class CommentaireController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire->setDate($date);
+            $commentaire->setAuteur($user);
             $entityManager->persist($commentaire);
             $entityManager->flush();
 

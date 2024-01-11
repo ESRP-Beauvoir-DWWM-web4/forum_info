@@ -4,27 +4,43 @@
 
 {% block body %}
     <h1>Article index</h1>
-
-    <table class="table">
-        <thead>
+    <div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+            <table class="min-w-full text-left text-sm font-light">
+            <thead class="border-b font-medium dark:border-neutral-500">
             <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Date</th>
-                <th>Statut</th>
-                <th>actions</th>
+                <th scope="col" class="px-6 py-4">Id</th>
+                <th scope="col" class="px-6 py-4">Titre</th>
+                <th scope="col" class="px-6 py-4">Contenu</th>
+                <th scope="col" class="px-6 py-4">Thèmes</th>
+                <th scope="col" class="px-6 py-4">Date</th>
+                <th scope="col" class="px-6 py-4">Statut</th>
+                <th scope="col" class="px-6 py-4">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.titre }}</td>
-                <td>{{ article.contenu }}</td>
-                <td>{{ article.date ? article.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.statut }}</td>
-                <td>
+            <tr class="border-b dark:border-neutral-500">
+                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ article.id }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ article.titre }}</td>
+                {# <td class="whitespace px-6 py-4">{{ article.contenu[0:30] }}...</td> #}
+                <td class="whitespace px-6 py-4">
+                {% set var = article.contenu|split(' ') %}
+                {% for item in var[0:10] %}
+                    {{ item }}
+                {% endfor %}           
+                ...
+                </td>
+                <td class="whitespace-nowrap px-6 py-4">
+                    {% for item in article.theme %}
+                        {{ item.nom }}
+                    {% endfor %}
+                </td>
+                <td class="whitespace-nowrap px-6 py-4">{{ article.date ? article.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ article.statut }}</td>
+                <td class="whitespace-nowrap px-6 py-4">
                     <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
                 </td>
@@ -36,6 +52,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    </div>
+    </div>
+    </div>
+    </div>
     <a href="{{ path('app_article_new') }}">Create new</a>
 {% endblock %}
