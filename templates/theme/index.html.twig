@@ -4,21 +4,24 @@
 
 {% block body %}
     <h1>Theme index</h1>
-
-    <table class="table">
-        <thead>
+    <div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+        <table class="min-w-full text-left text-sm font-light">
+            <thead class="border-b font-medium dark:border-neutral-500">
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
+                <th scope="col" class="px-6 py-4">Id</th>
+                <th scope="col" class="px-6 py-4">Nom</th>
+                <th scope="col" class="px-6 py-4">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for theme in themes %}
             <tr>
-                <td>{{ theme.id }}</td>
-                <td>{{ theme.nom }}</td>
-                <td>
+                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ theme.id }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ theme.nom }}</td>
+                <td class="whitespace-nowrap px-6 py-4">
                     <a href="{{ path('app_theme_show', {'id': theme.id}) }}">show</a>
                     <a href="{{ path('app_theme_edit', {'id': theme.id}) }}">edit</a>
                 </td>
@@ -30,6 +33,9 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_theme_new') }}">Create new</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <a href="{{ path('app_theme_new') }}" class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700">Create new</a>
 {% endblock %}
